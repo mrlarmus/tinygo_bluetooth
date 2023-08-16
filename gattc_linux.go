@@ -239,7 +239,7 @@ func (c DeviceCharacteristic) WriteWithoutResponse(p []byte) (n int, err error) 
 	return len(p), nil
 }
 
-func (c DeviceCharacteristic) WriteRequest(p []byte) (n int, err error) {
+func (c DeviceCharacteristic) Write(p []byte) (n int, err error) {
        err = c.characteristic.WriteValue(p, map[string]interface{}{"type": "request"})
        if err != nil {
                return 0, err
