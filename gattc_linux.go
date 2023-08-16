@@ -240,7 +240,7 @@ func (c DeviceCharacteristic) WriteWithoutResponse(p []byte) (n int, err error) 
 }
 
 func (c DeviceCharacteristic) Write(p []byte) (n int, err error) {
-       err = c.characteristic.WriteValue(p, map[string]interface{}{"type": "request"})
+       err = c.characteristic.WriteValue(p)
        if err != nil {
                return 0, err
        }
