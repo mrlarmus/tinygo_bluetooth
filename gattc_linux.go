@@ -199,12 +199,12 @@ func (s *DeviceService) DiscoverCharacteristics(uuids []UUID) ([]DeviceCharacter
 			// The caller wants to get a list of characteristics in a specific
 			// order. Check whether this is one of those.
 			for i, uuid := range uuids {
-				if chars[i] != (DeviceCharacteristic{}) {
+				//if chars[i] != (DeviceCharacteristic{}) {
 					// To support multiple identical characteristics, we need to
 					// ignore the characteristics that are already found. See:
 					// https://github.com/tinygo-org/bluetooth/issues/131
-					continue
-				}
+				//	continue
+				//}
 				if cuuid == uuid {
 					// one of the characteristics we're looking for.
 					chars[i] = char
@@ -240,7 +240,7 @@ func (c DeviceCharacteristic) WriteWithoutResponse(p []byte) (n int, err error) 
 }
 
 func (c DeviceCharacteristic) Write(p []byte) (n int, err error) {
-       err = c.characteristic.WriteValue(p)
+       err = c.characteristic.WriteValue(p, map[string]interface{}{"type": "request"})
        if err != nil {
                return 0, err
        }
